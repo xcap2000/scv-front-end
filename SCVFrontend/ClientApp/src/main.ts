@@ -7,7 +7,7 @@ import { environment } from './environments/environment';
 import 'zone.js';
 
 export function getBaseUrl() {
-  return document.getElementsByTagName('base')[0].href;
+  return environment.backend;
 }
 
 const providers = [
