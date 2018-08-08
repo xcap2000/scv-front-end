@@ -7,7 +7,7 @@
     "start": "ng serve --extract-css",
     "build": "ng build --extract-css",
     "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
-    "test": "ng test",
+    "test": "ng test --sourcemaps=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -27,6 +27,7 @@
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
+    "ngx-bootstrap": "^3.0.1",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },

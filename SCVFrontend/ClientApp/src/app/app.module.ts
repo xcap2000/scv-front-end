@@ -9,6 +9,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { ProvidersModule } from './providers/providers.module';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-    ])
+    ]),
+    ProvidersModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

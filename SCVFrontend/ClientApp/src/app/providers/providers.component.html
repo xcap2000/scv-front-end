@@ -1,0 +1,16 @@
+<div class="well" *ngIf="!showGrid()">No providers found, <a>click here</a> to add one.</div>
+<table class="table table-striped" *ngIf="showGrid()">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Base API URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let provider of providers">
+      <td>{{provider.name}}</td>
+      <td>{{provider.baseApiUrl}}</td>
+    </tr>
+  </tbody>
+</table>
+<pagination *ngIf="showGrid()" [totalItems]="30"></pagination>
