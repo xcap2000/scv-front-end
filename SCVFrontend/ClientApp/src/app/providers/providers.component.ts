@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProviderListModel, ProviderService } from '../provider.service';
+import { ProviderService } from '../provider.service';
+import { ProviderListModel } from '../provider-list.model';
+
 
 @Component({
   selector: 'app-providers',
@@ -8,24 +10,43 @@ import { ProviderListModel, ProviderService } from '../provider.service';
 })
 export class ProvidersComponent implements OnInit {
 
-  providers: ProviderListModel[] = [];
+  private isLoading: boolean = false;
+  public totalCount: number = 0;
+  public currentPage: number = 1;
+  public providers: ProviderListModel[] = [];
 
-  constructor(private providerService: ProviderService) {
+  public constructor(
+    private providerService: ProviderService) { }
+
+  public ngOnInit() {
+    this.getProviders();
   }
 
-  ngOnInit() {
-      this.getProviders();
+  public showGrid(): boolean {
+    return this.providers.length > 0;
   }
+
+  public showLoading(): boolean {
+    return this.isLoading;
+  }
+
+  // TODO - Implement and test.
+  /*
+  public pageChanged(event: any) {
+    this.page = event.page;
+  }
+  */
 
   private getProviders() {
-    this.providerService.getProviders()
+    this.isLoading = true;
+    this.providerService.get()
       .subscribe(
-        (providers) => this.providers = providers,
-        (error) => console.log(error)
+        pagedResult => {
+          this.totalCount = pagedResult.totalCount;
+          this.providers = pagedResult.items;
+          this.isLoading = false;
+        },
+        error => console.log(error)
       );
-  }
-
-  showGrid(): boolean {
-    return this.providers.length > 0;
   }
 }

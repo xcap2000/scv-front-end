@@ -13,4 +13,10 @@
     </tr>
   </tbody>
 </table>
-<pagination *ngIf="showGrid()" [totalItems]="30"></pagination>
+<pagination
+  *ngIf="showGrid()"
+  [boundaryLinks]="false"
+  [totalItems]="totalCount"
+  [maxSize]="3"
+  [(ngModel)]="currentPage">
+</pagination>
