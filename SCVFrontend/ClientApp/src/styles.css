@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+/* Pagination */
+.pagination-first > a,
+.pagination-prev > a,
+.pagination-next > a,
+.pagination-last > a {
+    content: "sdfsdfsd" !important;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+}
+
+.pagination-first > a::before {
+    content: "\e069";
+}
+
+.pagination-prev > a::before {
+    content: "\e071";
+}
+
+.pagination-next > a::before {
+    content: "\e075";
+}
+
+.pagination-last > a::before {
+    content: "\e077";
+}

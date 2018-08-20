@@ -8,6 +8,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
+    //TODO - Enable if possible.
+    //"noImplicitAny": true,
+    //"strictNullChecks": true,
     "typeRoots": [
       "node_modules/@types"
     ],
