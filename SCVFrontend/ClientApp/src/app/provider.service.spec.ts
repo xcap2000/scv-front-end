@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { ProviderService } from './provider.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { asyncData } from './asyncData';
 import { ProviderListModel } from './provider-list.model';
 import { PagedResult } from './paged-result.model';
@@ -16,7 +16,7 @@ describe('ProviderService', () => {
       providers: [
         ProviderService,
         { provide: HttpClient, useValue: httpClientMock },
-        { provide: 'BASE_URL', useValue: 'http://localhost/' }
+        { provide: 'BASE_URL', useValue: 'https://localhost/' }
       ]
     });
   });
@@ -42,5 +42,75 @@ describe('ProviderService', () => {
         fail);
     
     expect(httpClientMock.get.calls.count()).toBe(1, 'one call');
+  }));
+
+  it('should filter', inject([ProviderService], (service: ProviderService) => {
+    const expectedPagedResult: PagedResult<ProviderListModel> = {
+      totalCount: 0,
+      items: []
+    };
+
+    httpClientMock.get.and.returnValue(asyncData(expectedPagedResult));
+
+    service.get('provider1', 9, 9)
+      .subscribe(
+        pagedResult => expect(pagedResult).toEqual(expectedPagedResult, 'expected providers'),
+        fail);
+    
+    const headers = new HttpHeaders()
+      .set('Content-Type', ['application/json', 'charset=utf-8']);
+
+    const params = new HttpParams()
+      .set('page', '9')
+      .set('itemsPerPage', '9')
+      .set('filter', 'provider1');
+    
+    expect(httpClientMock.get).toHaveBeenCalledWith('https://localhost/providers', { headers: headers, params: params });
+  }));
+
+  it('should page', inject([ProviderService], (service: ProviderService) => {
+    const expectedPagedResult: PagedResult<ProviderListModel> = {
+      totalCount: 0,
+      items: []
+    };
+
+    httpClientMock.get.and.returnValue(asyncData(expectedPagedResult));
+
+    service.get(null, 2)
+      .subscribe(
+        pagedResult => expect(pagedResult).toEqual(expectedPagedResult, 'expected providers'),
+        fail);
+
+    const headers = new HttpHeaders()
+      .set('Content-Type', ['application/json', 'charset=utf-8']);
+
+    const params = new HttpParams()
+        .set('page', '2')
+        .set('itemsPerPage', '10');
+    
+    expect(httpClientMock.get).toHaveBeenCalledWith('https://localhost/providers', { headers: headers, params: params });
+  }));
+
+  it('should set items per page', inject([ProviderService], (service: ProviderService) => {
+    const expectedPagedResult: PagedResult<ProviderListModel> = {
+      totalCount: 0,
+      items: []
+    };
+
+    httpClientMock.get.and.returnValue(asyncData(expectedPagedResult));
+
+    service.get(null, 1, 15)
+      .subscribe(
+        pagedResult => expect(pagedResult).toEqual(expectedPagedResult, 'expected providers'),
+        fail);
+
+    const headers = new HttpHeaders()
+      .set('Content-Type', ['application/json', 'charset=utf-8']);
+
+    const params = new HttpParams()
+        .set('page', '1')
+        .set('itemsPerPage', '15');
+    
+    expect(httpClientMock.get).toHaveBeenCalledWith('https://localhost/providers', { headers: headers, params: params });
   }));
 });

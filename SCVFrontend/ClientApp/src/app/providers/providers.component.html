@@ -1,22 +1,57 @@
-<div class="well" *ngIf="!showGrid()">No providers found, <a>click here</a> to add one.</div>
-<table class="table table-striped" *ngIf="showGrid()">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Base API URL</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let provider of providers">
-      <td>{{provider.name}}</td>
-      <td>{{provider.baseApiUrl}}</td>
-    </tr>
-  </tbody>
-</table>
-<pagination
-  *ngIf="showGrid()"
-  [boundaryLinks]="false"
-  [totalItems]="totalCount"
-  [maxSize]="3"
-  [(ngModel)]="currentPage">
-</pagination>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 search">
+      <form class="form-inline search-form">
+        <div class="form-group">
+          <label class="sr-only" for="searchInput">Search:</label>
+          <input type="text" class="form-control" id="searchInput" placeholder="ex: Provider 1" [(ngModel)]="filter" name="filter">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search()">
+          <span class="glyphicon glyphicon-search"></span> Search
+        </button>
+        <button type="button" class="btn" (click)="clear()">
+          <span class="glyphicon glyphicon-remove"></span> Clear
+        </button>
+      </form>
+    </div>
+    <div class="col-xs-12 col-sm-4 actions">
+      <button type="button" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus"></span> Add New
+      </button>
+    </div>
+  </div>
+</div>
+<div class="loading" *ngIf="showLoading()">
+  <img src="loading.gif">
+</div>
+<div class="container-fluid">
+  <div class="well" *ngIf="showEmptyMessage()">No providers found, <a>click here</a> to add one.</div>
+  <table class="table table-striped providers" *ngIf="showGrid()">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Base API URL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let provider of providers">
+        <td>{{provider.name}}</td>
+        <td>{{provider.baseApiUrl}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-center">
+      <pagination
+        *ngIf="showGrid()"
+        [totalItems]="totalCount"
+        [maxSize]="3"
+        [boundaryLinks]="true"
+        firstText=" "
+        previousText=" "
+        nextText=" "
+        lastText=" "
+        [(ngModel)]="currentPage"
+        (pageChanged)="pageChanged($event)">
+      </pagination>
+    </div>
+</div>

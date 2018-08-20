@@ -51,13 +51,8 @@ describe('ProvidersComponent', () => {
     expect(component.totalCount).toBe(0);
   });
 
-  it('should set providers from the service', () => {
-    providerServiceMock.get.and.returnValue(of(pagedResult));
-    providers.push({ id: '4e9d0b71-a1a6-46c8-8ad2-4845201acf96', name: 'Provider 1', baseApiUrl: 'http://provider1.com' });
-
-    fixture.detectChanges();
-
-    expect(fixture.componentInstance.providers.length).toBe(1);
+  it('should start with null filter', () => {
+    expect(component.filter).toBeNull();
   });
 
   it('should set total count from the service', () => {
@@ -66,7 +61,16 @@ describe('ProvidersComponent', () => {
 
     fixture.detectChanges();
 
-    expect(fixture.componentInstance.totalCount).toBe(10);
+    expect(component.totalCount).toBe(10);
+  });
+
+  it('should set providers from the service', () => {
+    providerServiceMock.get.and.returnValue(of(pagedResult));
+    providers.push({ id: '4e9d0b71-a1a6-46c8-8ad2-4845201acf96', name: 'Provider 1', baseApiUrl: 'http://provider1.com' });
+
+    fixture.detectChanges();
+
+    expect(component.providers.length).toBe(1);
   });
 
   it('should show the grid', () => {
@@ -75,23 +79,65 @@ describe('ProvidersComponent', () => {
 
     fixture.detectChanges();
 
-    expect(fixture.componentInstance.showGrid()).toBe(true);
+    expect(component.showGrid()).toBe(true);
   });
 
   it('should not show the grid', () => {
-    expect(fixture.componentInstance.showGrid()).toBe(false);
+    expect(component.showGrid()).toBe(false);
+  });
+
+  it('should show the empty message', () => {
+    providerServiceMock.get.and.returnValue(of(pagedResult));
+
+    fixture.detectChanges();
+
+    expect(component.showEmptyMessage()).toBe(true);
+  });
+
+  it('should not show the empty message', () => {
+    providerServiceMock.get.and.returnValue(of(pagedResult));
+    providers.push({ id: '4e9d0b71-a1a6-46c8-8ad2-4845201acf96', name: 'Provider 1', baseApiUrl: 'http://provider1.com' });
+
+    fixture.detectChanges();
+
+    expect(component.showEmptyMessage()).toBe(false);
   });
 
   it('should show and hide loading', fakeAsync(() => {
     providerServiceMock.get.and.returnValue(asyncData(pagedResult));
 
     fixture.detectChanges();
-    expect(fixture.componentInstance.showLoading()).toBe(true);
+    expect(component.showLoading()).toBe(true);
 
     tick();
     fixture.detectChanges();
 
-    expect(fixture.componentInstance.showLoading()).toBe(false);
+    expect(component.showLoading()).toBe(false);
+  }));
+
+  it('should not show the grid when loading', fakeAsync(() => {
+    providerServiceMock.get.and.returnValue(asyncData(pagedResult));
+    providers.push({ id: '4e9d0b71-a1a6-46c8-8ad2-4845201acf96', name: 'Provider 1', baseApiUrl: 'http://provider1.com' });
+
+    fixture.detectChanges();
+    expect(component.showGrid()).toBe(false);
+
+    tick();
+    fixture.detectChanges();
+
+    expect(component.showGrid()).toBe(true);
+  }));
+
+  it('should not show the empty message when loading', fakeAsync(() => {
+    providerServiceMock.get.and.returnValue(asyncData(pagedResult));
+
+    fixture.detectChanges();
+    expect(component.showEmptyMessage()).toBe(false);
+
+    tick();
+    fixture.detectChanges();
+
+    expect(component.showEmptyMessage()).toBe(true);
   }));
 
   it('should render the grid', () => {
@@ -120,5 +166,69 @@ describe('ProvidersComponent', () => {
       expect((nameElement.nativeElement as HTMLTableDataCellElement).innerText).toBe(provider.name);
       expect((baseUrlElement.nativeElement as HTMLTableDataCellElement).innerText).toBe(provider.baseApiUrl);
     }
+  });
+
+  it('should filter', () => {
+    providerServiceMock.get.and.returnValue(of(pagedResult));
+
+    component.filter = 'provider1';
+
+    component.search();
+
+    expect(providerServiceMock.get).toHaveBeenCalledWith('provider1', 1);
+  });
+
+  it('should clear the filter', () => {
+    providerServiceMock.get.and.returnValue(of(pagedResult));
+
+    component.filter = 'provider1';
+
+    component.search();
+
+    expect(providerServiceMock.get).toHaveBeenCalledWith('provider1', 1);
+
+    component.clear();
+
+    component.search();
+
+    expect(providerServiceMock.get).toHaveBeenCalledWith(null, 1);
+  });
+
+  it('should change the page', () => {
+    providerServiceMock.get.and.returnValue(of(pagedResult));
+
+    component.pageChanged({page: 2});
+
+    expect(component.currentPage).toBe(2);
+
+    expect(providerServiceMock.get).toHaveBeenCalledWith(null, 2);
+  });
+
+  it('should reset the page after filtering', () => {
+    providerServiceMock.get.and.returnValue(of(pagedResult));
+
+    component.pageChanged({page: 5});
+
+    component.filter = 'provider1';
+
+    component.search();
+
+    expect(providerServiceMock.get).toHaveBeenCalledWith('provider1', 1);
+  });
+
+  it('should reset the page after clearing', () => {
+    providerServiceMock.get.and.returnValue(of(pagedResult));
+
+    component.filter = 'provider1';
+    
+    component.search();
+
+    component.pageChanged({page: 5});
+
+    expect(providerServiceMock.get).toHaveBeenCalledWith('provider1', 5);
+
+    component.clear();
+
+    expect(providerServiceMock.get).toHaveBeenCalledWith(null, 1);
   });
 });

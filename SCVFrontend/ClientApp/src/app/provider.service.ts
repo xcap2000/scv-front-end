@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ProviderListModel } from './provider-list.model';
 import { PagedResult } from './paged-result.model';
 
@@ -11,8 +11,18 @@ export class ProviderService {
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string) { }
 
-  // TODO - Add parameters to filter and page the records.
-  public get(): Observable<PagedResult<ProviderListModel>> {
-    return this.http.get<PagedResult<ProviderListModel>>(this.baseUrl + 'providers');
+  public get(filter: string = null, page: number = 1, itemsPerPage: number = 10): Observable<PagedResult<ProviderListModel>> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', ['application/json', 'charset=utf-8']);
+
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('itemsPerPage', itemsPerPage.toString());
+
+    if (filter) {
+      params = params.set('filter', filter);
+    }
+
+    return this.http.get<PagedResult<ProviderListModel>>(this.baseUrl + 'providers', { headers: headers, params: params });
   }
 }

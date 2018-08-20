@@ -17,6 +17,7 @@
                             <span class='glyphicon glyphicon-home'></span> Home
                         </a>
                     </li>
+                    <!--
                     <li [routerLinkActive]='["link-active"]'>
                         <a [routerLink]='["/counter"]' (click)='collapse()'>
                             <span class='glyphicon glyphicon-education'></span> Counter
@@ -27,20 +28,19 @@
                             <span class='glyphicon glyphicon-th-list'></span> Fetch data
                         </a>
                     </li>
+                    -->
                     <li [routerLinkActive]='["link-active"]'>
-                        <a [routerLink]='["/providers"]' (click)='collapse()'>
-                            <span class='glyphicon glyphicon-th-list'></span> Providers
-                        </a>
+                        <a [routerLink]='["/providers"]' (click)='collapse()'>Providers</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown" dropdown>
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle>
-                            <img class="profile-image" alt="Carlos" src="avatar.jpg" alt="" /> Carlos <span class="caret"></span>
+                            <img class="img-circle profile-image" alt="Carlos" src="avatar.jpg" alt="" /> Carlos <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" *dropdownMenu>
-                            <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
+                            <li><a><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+                            <li><a><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
                         </ul>
                     </li>
                 </ul>
