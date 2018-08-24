@@ -3,18 +3,17 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ProviderListModel } from './provider-list.model';
 import { PagedResult } from './paged-result.model';
-
+import { ProviderCreateModel } from './provider-create.model';
+import { ProviderEditModel } from './provider-edit.model';
 
 @Injectable()
 export class ProviderService {
+
   public constructor(
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string) { }
 
   public get(filter: string = null, page: number = 1, itemsPerPage: number = 10): Observable<PagedResult<ProviderListModel>> {
-    const headers = new HttpHeaders()
-      .set('Content-Type', ['application/json', 'charset=utf-8']);
-
     let params = new HttpParams()
       .set('page', page.toString())
       .set('itemsPerPage', itemsPerPage.toString());
@@ -23,6 +22,28 @@ export class ProviderService {
       params = params.set('filter', filter);
     }
 
-    return this.http.get<PagedResult<ProviderListModel>>(this.baseUrl + 'providers', { headers: headers, params: params });
+    return this.http.get<PagedResult<ProviderListModel>>(this.baseUrl + 'providers', { headers: this.getDefaultHeaders(), params: params });
   }
+
+  public getById(id: string = null) : Observable<ProviderEditModel> {
+    return this.http.get<ProviderEditModel>(this.baseUrl + `providers/${id}`, { headers: this.getDefaultHeaders() });
+  }
+
+  public post(providerCreateModel: ProviderCreateModel) : Observable<ProviderCreateModel> {
+    return this.http.post<ProviderCreateModel>(this.baseUrl + 'providers', providerCreateModel, { headers: this.getDefaultHeaders() });
+  }
+
+  public put(providerEditModel: ProviderEditModel) : Observable<ProviderCreateModel> {
+    return this.http.put<ProviderEditModel>(this.baseUrl + `providers/${providerEditModel.id}`, providerEditModel, { headers: this.getDefaultHeaders() });
+  }
+
+  public delete(id: string) : Observable<ProviderCreateModel> {
+    return this.http.delete<ProviderEditModel>(this.baseUrl + `providers/${id}`, { headers: this.getDefaultHeaders() });
+  }
+
+  private getDefaultHeaders(): HttpHeaders {
+    return new HttpHeaders()
+      .set('Content-Type', ['application/json', 'charset=utf-8']);
+  }
+  
 }
