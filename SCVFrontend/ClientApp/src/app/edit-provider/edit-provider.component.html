@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <h1>Edit provider</h1>
+    <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" name="name" [(ngModel)]="provider.name">
+        </div>
+   
+        <div class="form-group">
+          <label for="baseApiUrl">Base API URL</label>
+          <input type="text" class="form-control" id="baseApiUrl" name="baseApiUrl" [(ngModel)]="provider.baseApiUrl">
+        </div>
+   
+        <button type="submit" class="btn btn-success" (click)="edit()">Save</button>
+        <button type="button" class="btn" [routerLink]='["/providers"]'>Back to providers</button>
+    </form>
+  </div>

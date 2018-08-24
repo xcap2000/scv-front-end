@@ -1,0 +1,18 @@
+.spinner {
+    background-color: rgba(0, 0, 0, 0.1);
+    position: fixed;
+    z-index: 3;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 50px);
+}
+
+.spinner > img {
+    position: fixed;
+    z-index: 4;
+    top: calc(50% - 25px - 32px);
+    left: calc(50% - 32px);
+    width: 64px;
+    height: 64px;
+}
