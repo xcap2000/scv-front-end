@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProviderService } from '../provider.service';
 import { ProviderListModel } from '../provider-list.model';
+import { SpinnerService } from '../spinner.service';
 
 
 @Component({
@@ -10,13 +11,13 @@ import { ProviderListModel } from '../provider-list.model';
 })
 export class ProvidersComponent implements OnInit {
 
-  private isLoading: boolean = false;
   public filter: string = null;
   public totalCount: number = 0;
   public currentPage: number = 1;
   public providers: ProviderListModel[] = [];
 
   public constructor(
+    private spinnerService: SpinnerService,
     private providerService: ProviderService) { }
 
   public ngOnInit() {
@@ -28,11 +29,7 @@ export class ProvidersComponent implements OnInit {
   }
 
   public showEmptyMessage(): boolean {
-    return this.providers.length == 0 && !this.isLoading;
-  }
-
-  public showLoading(): boolean {
-    return this.isLoading;
+    return this.providers.length == 0 && !this.spinnerService.showSpinner();
   }
 
   public pageChanged(event: any) {
@@ -51,14 +48,14 @@ export class ProvidersComponent implements OnInit {
   }
 
   private getProviders(filter: string, page: number) {
-    this.isLoading = true;
+    this.spinnerService.show();
     this.providerService.get(filter, page)
       .subscribe(
         pagedResult => {
           this.totalCount = pagedResult.totalCount;
           this.providers = pagedResult.items;
-          this.isLoading = false;
           this.currentPage = page;
+          this.spinnerService.hide();
         },
         error => console.log(error)
       );

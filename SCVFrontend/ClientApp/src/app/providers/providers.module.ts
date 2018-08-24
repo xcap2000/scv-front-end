@@ -6,6 +6,9 @@ import { ProvidersComponent } from './providers.component';
 import { ProviderService } from '../provider.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule } from '@angular/forms';
+import { CreateProviderComponent } from '../create-provider/create-provider.component';
+import { EditProviderComponent } from '../edit-provider/edit-provider.component';
+import { DeleteProviderComponent } from '../delete-provider/delete-provider.component';
 
 @NgModule({
   imports: [
@@ -14,7 +17,7 @@ import { FormsModule } from '@angular/forms';
     PaginationModule.forRoot(),
     FormsModule
   ],
-  declarations: [ProvidersComponent],
+  declarations: [ProvidersComponent, CreateProviderComponent, EditProviderComponent, DeleteProviderComponent],
   providers: [ProviderService]
 })
 export class ProvidersModule { }

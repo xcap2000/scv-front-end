@@ -15,28 +15,31 @@
       </form>
     </div>
     <div class="col-xs-12 col-sm-4 actions">
-      <button type="button" class="btn btn-primary">
+      <button [routerLink]='["/providers/create"]' type="button" class="btn btn-primary">
         <span class="glyphicon glyphicon-plus"></span> Add New
       </button>
     </div>
   </div>
 </div>
-<div class="loading" *ngIf="showLoading()">
-  <img src="loading.gif">
-</div>
 <div class="container-fluid">
-  <div class="well" *ngIf="showEmptyMessage()">No providers found, <a>click here</a> to add one.</div>
+  <div class="well" *ngIf="showEmptyMessage()">No providers found.</div>
   <table class="table table-striped providers" *ngIf="showGrid()">
     <thead>
       <tr>
         <th>Name</th>
         <th>Base API URL</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let provider of providers">
         <td>{{provider.name}}</td>
         <td>{{provider.baseApiUrl}}</td>
+        <td>
+          <a [routerLink]='["/providers/edit", provider.id]'>Edit</a>
+          |
+          <a [routerLink]='["/providers/delete", provider.id]'>Delete</a>
+        </td>
       </tr>
     </tbody>
   </table>
