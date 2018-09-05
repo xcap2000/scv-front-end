@@ -15,27 +15,22 @@ export class CreateProviderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private spinnerService: SpinnerService,
     private providerService: ProviderService) { }
 
   ngOnInit() {
-    this.spinnerService.show();
     this.providerService.getById()
       .subscribe(
         providerEditModel => {
           this.provider = providerEditModel;
-          this.spinnerService.hide();
         },
         error => console.log(error)
       );
   }
 
   public create() {
-    this.spinnerService.show();
     this.providerService.post(this.provider)
       .subscribe(
         () => {
-          this.spinnerService.hide();
           this.router.navigate(['/providers']);
         },
         error => console.log(error)

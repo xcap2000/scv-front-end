@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { CreateProviderComponent } from '../create-provider/create-provider.component';
 import { EditProviderComponent } from '../edit-provider/edit-provider.component';
 import { DeleteProviderComponent } from '../delete-provider/delete-provider.component';
+import { AuthorizationService } from '../authorization.service';
+import { AuthorizedGuard } from '../authorized.guard';
 
 @NgModule({
   imports: [
@@ -18,6 +20,6 @@ import { DeleteProviderComponent } from '../delete-provider/delete-provider.comp
     FormsModule
   ],
   declarations: [ProvidersComponent, CreateProviderComponent, EditProviderComponent, DeleteProviderComponent],
-  providers: [ProviderService]
+  providers: [ProviderService, AuthorizationService, AuthorizedGuard]
 })
 export class ProvidersModule { }

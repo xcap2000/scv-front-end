@@ -18,7 +18,6 @@ export class DeleteProviderComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private spinnerService: SpinnerService,
     private providerService: ProviderService) {
       this.route.params.subscribe(params => {
         this.id = params['id'];
@@ -26,23 +25,19 @@ export class DeleteProviderComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.spinnerService.show();
     this.providerService.getById(this.id)
       .subscribe(
         providerEditModel => {
           this.provider = providerEditModel;
-          this.spinnerService.hide();
         },
         error => console.log(error)
       );
   }
 
   public delete() {
-    this.spinnerService.show();
     this.providerService.delete(this.id)
       .subscribe(
         () => {
-          this.spinnerService.hide();
           this.router.navigate(['/providers']);
         },
         error => console.log(error)
