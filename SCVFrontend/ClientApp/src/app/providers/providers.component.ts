@@ -48,14 +48,12 @@ export class ProvidersComponent implements OnInit {
   }
 
   private getProviders(filter: string, page: number) {
-    this.spinnerService.show();
     this.providerService.get(filter, page)
       .subscribe(
         pagedResult => {
           this.totalCount = pagedResult.totalCount;
           this.providers = pagedResult.items;
           this.currentPage = page;
-          this.spinnerService.hide();
         },
         error => console.log(error)
       );

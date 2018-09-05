@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <h1>Sign In</h1>
+  <form>
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="text" class="form-control" id="email" name="email" [(ngModel)]="signInModel.email">
+      </div>
+ 
+      <div class="form-group">
+        <label for="baseApiUrl">Password</label>
+        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="signInModel.password">
+      </div>
+ 
+      <button type="submit" class="btn btn-success" (click)="signIn()">Sign In</button>
+      <button type="button" class="btn" [routerLink]='["/home"]'>Back to home</button>
+  </form>
+</div>

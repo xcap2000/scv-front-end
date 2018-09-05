@@ -28,3 +28,7 @@ li.link-active a:focus {
     float: left;
     left: -5px;
 }
+
+.dropdown-menu a {
+    cursor: pointer;
+}

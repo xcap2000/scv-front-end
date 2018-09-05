@@ -41,6 +41,7 @@ export class ProviderService {
     return this.http.delete<ProviderEditModel>(this.baseUrl + `providers/${id}`, { headers: this.getDefaultHeaders() });
   }
 
+  // TODO - Remove duplication, inheritance maybe?
   private getDefaultHeaders(): HttpHeaders {
     return new HttpHeaders()
       .set('Content-Type', ['application/json', 'charset=utf-8']);

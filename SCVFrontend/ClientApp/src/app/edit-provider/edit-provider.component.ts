@@ -17,7 +17,6 @@ export class EditProviderComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private spinnerService: SpinnerService,
     private providerService: ProviderService) {
       this.route.params.subscribe(params => {
         this.id = params['id'];
@@ -25,23 +24,19 @@ export class EditProviderComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.spinnerService.show();
     this.providerService.getById(this.id)
       .subscribe(
         providerEditModel => {
           this.provider = providerEditModel;
-          this.spinnerService.hide();
         },
         error => console.log(error)
       );
   }
 
   public edit() {
-    this.spinnerService.show();
     this.providerService.put(this.provider)
       .subscribe(
         () => {
-          this.spinnerService.hide();
           this.router.navigate(['/providers']);
         },
         error => console.log(error)

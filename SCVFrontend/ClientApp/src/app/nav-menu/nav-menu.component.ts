@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthorizationService } from '../authorization.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-menu',
@@ -6,13 +8,27 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
-  isExpanded = false;
+  public isExpanded = false;
 
-  collapse() {
+  public constructor(
+    private router: Router,
+    private authorizationService: AuthorizationService) { }
+
+  public collapse(): void {
     this.isExpanded = false;
   }
 
-  toggle() {
+  public toggle(): void {
     this.isExpanded = !this.isExpanded;
   }
+
+  public showLogin(): boolean {
+    return this.authorizationService.isAuthorized();
+  }
+
+  public signOut(): void {
+    this.authorizationService.removeAuthorization();
+    this.router.navigate(['/home']);
+  }
+
 }
