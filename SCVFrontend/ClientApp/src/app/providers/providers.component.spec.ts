@@ -107,12 +107,9 @@ describe('ProvidersComponent', () => {
     providerServiceMock.get.and.returnValue(asyncData(pagedResult));
 
     fixture.detectChanges();
-    expect(component.showLoading()).toBe(true);
 
     tick();
     fixture.detectChanges();
-
-    expect(component.showLoading()).toBe(false);
   }));
 
   it('should not show the grid when loading', fakeAsync(() => {

@@ -27,7 +27,7 @@
                     </li>
                     <li class="dropdown" dropdown  *ngIf="showLogin()">
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle>
-                            <img class="img-circle profile-image" alt="Carlos" src="avatar.jpg" alt="" /> Carlos <span class="caret"></span>
+                            <img class="img-circle profile-image" alt="Carlos" src="data:image/jpg;base64,{{photo()}}" alt="" /> {{name()}} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" *dropdownMenu>
                             <li [routerLinkActive]='["link-active"]'>
