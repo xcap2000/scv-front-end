@@ -31,4 +31,12 @@ export class NavMenuComponent {
     this.router.navigate(['/home']);
   }
 
+  public name(): string {
+    return this.authorizationService.getUserName();
+  }
+
+  public photo(): string {
+    return this.authorizationService.getPhoto();
+  }
+
 }
