@@ -17,7 +17,6 @@ import { SignInService } from './signin.service';
 import { HttpSpinnerInterceptor } from './http-spinner.interceptor';
 import { SettingsComponent } from './settings/settings.component';
 import { AuthorizedGuard } from './authorized.guard';
-//import { HttpXSRFInterceptor } from './http-xsrf.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,8 +44,6 @@ import { AuthorizedGuard } from './authorized.guard';
     SpinnerService,
     AuthorizationService,
     SignInService,
-    /* TODO - Verify whether it will be possible to re-enable.
-    { provide: HTTP_INTERCEPTORS, useClass: HttpXSRFInterceptor, multi: true }*/
     { provide: HTTP_INTERCEPTORS, useClass: HttpSpinnerInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpJWTInterceptor, multi: true }
   ],
