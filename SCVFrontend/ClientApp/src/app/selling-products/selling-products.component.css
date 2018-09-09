@@ -1,0 +1,31 @@
+.body-selling-products {
+    margin-top: 20px;
+}
+
+.selling-products {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.brand-logo {
+    width: 48px;
+    width: 48px;
+}
+
+.all {
+    padding: 24px;
+}
+
+.selling-product-name {
+    height: 50px;
+}
+
+@media (min-width: 768px) {
+    .fixed-sidebar {
+        position: fixed;
+    }
+
+    .selling-products {
+        margin-left: 25%;
+    }
+}

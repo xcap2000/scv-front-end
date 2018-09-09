@@ -23,7 +23,7 @@ export class SignInComponent {
       .subscribe(
         async signInResponseModel => {
           this.authorizationService.authorize(signInResponseModel);
-          await this.router.navigate(['/providers']);
+          await this.router.navigate(['/home']);
         },
         error => console.log(error)
       );
