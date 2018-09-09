@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SignInResponseModel } from './signin-response.model';
 
+
 @Injectable()
 export class AuthorizationService {
 
@@ -43,5 +44,4 @@ export class AuthorizationService {
   public getPhoto(): string {
     return localStorage.getItem('photo');
   }
-
 }

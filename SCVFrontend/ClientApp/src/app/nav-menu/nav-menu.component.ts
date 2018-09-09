@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { AuthorizationService } from '../authorization.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
+  
   public isExpanded = false;
 
   public constructor(
@@ -39,8 +41,15 @@ export class NavMenuComponent {
     return this.authorizationService.getPhoto();
   }
 
+  public showSellingProducts(): boolean {
+    return this.authorizationService.isAuthorized() && this.authorizationService.getUserType() !== 3;
+  }
+
   public showProviders(): boolean {
     return this.authorizationService.isAuthorized() && this.authorizationService.getUserType() === 3;
   }
 
+  public showCart(): boolean {
+    return this.authorizationService.isAuthorized() && this.authorizationService.getUserType() !== 3;
+  }
 }

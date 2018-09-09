@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SpinnerService } from '../spinner.service';
 import { ProviderService } from '../provider.service';
-import { ProviderDeleteModel } from '../provider-delete.model';
 import { ProviderEditModel } from '../provider-edit.model';
+
 
 @Component({
   selector: 'app-delete-provider',
@@ -15,16 +14,16 @@ export class DeleteProviderComponent implements OnInit {
   private id: string = '';
   public provider: ProviderEditModel = { id: '', name: '', baseApiUrl: '' };
 
-  constructor(
+  public constructor(
     private router: Router,
     private route: ActivatedRoute,
     private providerService: ProviderService) {
-      this.route.params.subscribe(params => {
-        this.id = params['id'];
-      });
-    }
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+  }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.providerService.getById(this.id)
       .subscribe(
         providerEditModel => {
@@ -34,7 +33,7 @@ export class DeleteProviderComponent implements OnInit {
       );
   }
 
-  public delete() {
+  public delete(): void {
     this.providerService.delete(this.id)
       .subscribe(
         () => {
@@ -43,5 +42,4 @@ export class DeleteProviderComponent implements OnInit {
         error => console.log(error)
       );
   }
-
 }

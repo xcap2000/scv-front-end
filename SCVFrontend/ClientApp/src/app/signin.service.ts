@@ -17,5 +17,4 @@ export class SignInService extends BaseService {
   public signIn(signInModel: SignInModel): Observable<SignInResponseModel> {
     return this.http.post<SignInResponseModel>(this.baseUrl + 'signin', signInModel, { headers: this.getDefaultHeaders() });
   }
-
 }

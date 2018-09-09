@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from '../spinner.service';
 
+
 @Component({
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',
@@ -8,11 +9,10 @@ import { SpinnerService } from '../spinner.service';
 })
 export class SpinnerComponent {
 
-  constructor(
+  public constructor(
     private spinnerService: SpinnerService) { }
 
   public showSpinner(): boolean {
     return this.spinnerService.showSpinner();
   }
-
 }

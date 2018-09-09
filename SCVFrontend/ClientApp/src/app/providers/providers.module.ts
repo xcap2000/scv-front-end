@@ -12,6 +12,7 @@ import { DeleteProviderComponent } from '../delete-provider/delete-provider.comp
 import { AuthorizationService } from '../authorization.service';
 import { AuthorizedGuard } from '../authorized.guard';
 
+
 @NgModule({
   imports: [
     CommonModule,

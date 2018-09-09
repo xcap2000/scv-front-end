@@ -7,6 +7,7 @@ import { BrandService } from '../brand.service';
 import { AuthorizationService } from '../authorization.service';
 import { CartService } from '../cart.service';
 
+
 @Component({
   selector: 'app-selling-products',
   templateUrl: './selling-products.component.html',
@@ -46,11 +47,10 @@ export class SellingProductsComponent implements OnInit {
   }
 
   public buy(sellingProduct: SellingProductListModel): void {
-     this.cartService.post(this.authorizationService.getUserId(), sellingProduct.id)
+    this.cartService.post(this.authorizationService.getUserId(), sellingProduct.id)
       .subscribe(
         cartItemModel => sellingProduct.inCart = true,
         error => console.log(error)
       )
   }
-
 }

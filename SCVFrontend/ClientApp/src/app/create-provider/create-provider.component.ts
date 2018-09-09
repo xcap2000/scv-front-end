@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProviderService } from '../provider.service';
 import { Router } from '@angular/router';
-import { SpinnerService } from '../spinner.service';
 import { ProviderEditModel } from '../provider-edit.model';
+
 
 @Component({
   selector: 'app-create-provider',
@@ -13,11 +13,11 @@ export class CreateProviderComponent implements OnInit {
 
   public provider: ProviderEditModel = { name: '', baseApiUrl: '' };
 
-  constructor(
+  public constructor(
     private router: Router,
     private providerService: ProviderService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.providerService.getById()
       .subscribe(
         providerEditModel => {
@@ -27,7 +27,7 @@ export class CreateProviderComponent implements OnInit {
       );
   }
 
-  public create() {
+  public create(): void {
     this.providerService.post(this.provider)
       .subscribe(
         () => {
@@ -36,5 +36,4 @@ export class CreateProviderComponent implements OnInit {
         error => console.log(error)
       );
   }
-
 }

@@ -19,7 +19,7 @@
                             <span class='glyphicon glyphicon-home'></span> Home
                         </a>
                     </li>
-                    <li [routerLinkActive]='["link-active"]' *ngIf="showLogin()">
+                    <li [routerLinkActive]='["link-active"]' *ngIf="showSellingProducts()">
                         <a [routerLink]='["/selling-products"]' (click)='collapse()'>Selling Products</a>
                     </li>
                     <li [routerLinkActive]='["link-active"]' *ngIf="showProviders()">
@@ -27,7 +27,7 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li [routerLinkActive]='["link-active"]' *ngIf="showLogin()">
+                    <li [routerLinkActive]='["link-active"]' *ngIf="showCart()">
                         <a [routerLink]='["/cart"]' (click)='collapse()'>
                             <span class='glyphicon glyphicon-shopping-cart'></span> Cart
                         </a>
