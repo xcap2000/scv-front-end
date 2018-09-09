@@ -17,7 +17,12 @@ import { SignInService } from './signin.service';
 import { HttpSpinnerInterceptor } from './http-spinner.interceptor';
 import { SettingsComponent } from './settings/settings.component';
 import { AuthorizedGuard } from './authorized.guard';
-//import { HttpXSRFInterceptor } from './http-xsrf.interceptor';
+import { ProductsComponent } from './products/products.component';
+import { SellingProductsComponent } from './selling-products/selling-products.component';
+import { BrandService } from './brand.service';
+import { SellingProductService } from './selling-product.service';
+import { CartComponent } from './cart/cart.component';
+import { CartService } from './cart.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,10 @@ import { AuthorizedGuard } from './authorized.guard';
     HomeComponent,
     SpinnerComponent,
     SignInComponent,
-    SettingsComponent
+    SettingsComponent,
+    ProductsComponent,
+    SellingProductsComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,8 +42,12 @@ import { AuthorizedGuard } from './authorized.guard';
     FormsModule,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent, pathMatch: 'full' },
+      { path: 'selling-products', component: SellingProductsComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
+      { path: 'selling-products/:brandId', component: SellingProductsComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
+      { path: 'cart', component: CartComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
       { path: 'signin', component: SignInComponent, pathMatch: 'full' },
       { path: 'settings', component: SettingsComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
+      { path: 'products', component: ProductsComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
       { path: '',    redirectTo: '/home', pathMatch: 'full'  }
     ]),
     ProvidersModule,
@@ -45,8 +57,9 @@ import { AuthorizedGuard } from './authorized.guard';
     SpinnerService,
     AuthorizationService,
     SignInService,
-    /* TODO - Verify whether it will be possible to re-enable.
-    { provide: HTTP_INTERCEPTORS, useClass: HttpXSRFInterceptor, multi: true }*/
+    BrandService,
+    SellingProductService,
+    CartService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpSpinnerInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpJWTInterceptor, multi: true }
   ],
