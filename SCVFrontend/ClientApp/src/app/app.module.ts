@@ -15,7 +15,6 @@ import { SignInComponent } from './signin/signin.component';
 import { AuthorizationService } from './authorization.service';
 import { SignInService } from './signin.service';
 import { HttpSpinnerInterceptor } from './http-spinner.interceptor';
-import { SettingsComponent } from './settings/settings.component';
 import { AuthorizedGuard } from './authorized.guard';
 import { ProductsComponent } from './products/products.component';
 import { SellingProductsComponent } from './selling-products/selling-products.component';
@@ -31,7 +30,6 @@ import { CartService } from './cart.service';
     HomeComponent,
     SpinnerComponent,
     SignInComponent,
-    SettingsComponent,
     ProductsComponent,
     SellingProductsComponent,
     CartComponent
@@ -46,7 +44,6 @@ import { CartService } from './cart.service';
       { path: 'selling-products/:brandId', component: SellingProductsComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
       { path: 'cart', component: CartComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
       { path: 'signin', component: SignInComponent, pathMatch: 'full' },
-      { path: 'settings', component: SettingsComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
       { path: 'products', component: ProductsComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
       { path: '',    redirectTo: '/home', pathMatch: 'full'  }
     ]),
