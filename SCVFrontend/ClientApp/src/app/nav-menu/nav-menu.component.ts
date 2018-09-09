@@ -39,4 +39,8 @@ export class NavMenuComponent {
     return this.authorizationService.getPhoto();
   }
 
+  public showProviders(): boolean {
+    return this.authorizationService.isAuthorized() && this.authorizationService.getUserType() === 3;
+  }
+
 }

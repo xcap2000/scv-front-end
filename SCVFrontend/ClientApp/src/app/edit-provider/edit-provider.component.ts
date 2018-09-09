@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SpinnerService } from '../spinner.service';
 import { ProviderService } from '../provider.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProviderEditModel } from '../provider-edit.model';
