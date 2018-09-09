@@ -5,7 +5,7 @@ export class SpinnerService {
 
   private shouldShowSpinner: boolean = false;
 
-  constructor() { }
+  public constructor() { }
 
   public showSpinner() : boolean {
     return this.shouldShowSpinner;

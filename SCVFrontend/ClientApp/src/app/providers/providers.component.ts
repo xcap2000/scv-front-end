@@ -20,7 +20,7 @@ export class ProvidersComponent implements OnInit {
     private spinnerService: SpinnerService,
     private providerService: ProviderService) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.getProviders(this.filter, this.currentPage);
   }
 
@@ -32,22 +32,22 @@ export class ProvidersComponent implements OnInit {
     return this.providers.length == 0 && !this.spinnerService.showSpinner();
   }
 
-  public pageChanged(event: any) {
+  public pageChanged(event: any): void {
     this.getProviders(this.filter, event.page);
   }
 
-  public search() {
+  public search(): void {
     this.currentPage = 1;
     this.getProviders(this.filter, this.currentPage)
   }
 
-  public clear() {
+  public clear(): void {
     this.filter = null;
     this.currentPage = 1;
     this.getProviders(this.filter, this.currentPage)
   }
 
-  private getProviders(filter: string, page: number) {
+  private getProviders(filter: string, page: number): void {
     this.providerService.get(filter, page)
       .subscribe(
         pagedResult => {

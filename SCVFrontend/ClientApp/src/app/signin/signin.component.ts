@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SignInModel } from '../signin.model';
 import { Router } from '@angular/router';
-import { SpinnerService } from '../spinner.service';
 import { SignInService } from '../signin.service';
 import { AuthorizationService } from '../authorization.service';
+
 
 @Component({
   selector: 'app-signin',
@@ -28,5 +28,4 @@ export class SignInComponent {
         error => console.log(error)
       );
   }
-
 }

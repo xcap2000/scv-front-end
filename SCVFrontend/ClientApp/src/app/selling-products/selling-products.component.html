@@ -30,11 +30,14 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-success btn-product pull-right" (click)='buy(sellingProduct)' [disabled]="sellingProduct.inCart">
+                                <button class="btn btn-success btn-product pull-right" (click)='buy(sellingProduct)' [disabled]="sellingProduct.inCart" *ngIf="sellingProduct.canSell">
                                     <span class="glyphicon glyphicon-shopping-cart"></span>
                                     <span *ngIf="!sellingProduct.inCart">Add to Cart</span>
                                     <span *ngIf="sellingProduct.inCart">In Cart</span>
                                 </button>
+                                <h3 *ngIf="!sellingProduct.canSell" class="text-danger">
+                                    Out of stock
+                                </h3>
                             </div>
                         </div>
                     </div>

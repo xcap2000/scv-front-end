@@ -3,6 +3,7 @@ import { ProviderService } from '../provider.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProviderEditModel } from '../provider-edit.model';
 
+
 @Component({
   selector: 'app-edit-provider',
   templateUrl: './edit-provider.component.html',
@@ -13,16 +14,16 @@ export class EditProviderComponent implements OnInit {
   private id: string = '';
   public provider: ProviderEditModel = { id: '', name: '', baseApiUrl: '' };
 
-  constructor(
+  public constructor(
     private router: Router,
     private route: ActivatedRoute,
     private providerService: ProviderService) {
-      this.route.params.subscribe(params => {
-        this.id = params['id'];
-      });
-    }
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+  }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.providerService.getById(this.id)
       .subscribe(
         providerEditModel => {
@@ -32,7 +33,7 @@ export class EditProviderComponent implements OnInit {
       );
   }
 
-  public edit() {
+  public edit(): void {
     this.providerService.put(this.provider)
       .subscribe(
         () => {
@@ -41,5 +42,4 @@ export class EditProviderComponent implements OnInit {
         error => console.log(error)
       );
   }
-
 }

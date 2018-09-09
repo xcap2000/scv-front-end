@@ -16,5 +16,4 @@ export class SellingProductService extends BaseService {
   public get(userId: string, brandId: string = null): Observable<SellingProductListModel[]> {
     return this.http.get<SellingProductListModel[]>(this.baseUrl + 'selling-products/' + userId + (brandId ? '/' + brandId : ''), { headers: this.getDefaultHeaders() });
   }
-
 }

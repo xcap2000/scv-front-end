@@ -9,10 +9,10 @@ export class HttpSpinnerInterceptor implements HttpInterceptor {
 
   private counter: number = 0;
 
-  constructor(
+  public constructor(
     @Inject(forwardRef(() => SpinnerService)) private spinnerService) { }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinnerService.show();
     return next.handle(req).pipe(
       map(event => {
@@ -26,5 +26,4 @@ export class HttpSpinnerInterceptor implements HttpInterceptor {
       })
     )
   }
-
 }

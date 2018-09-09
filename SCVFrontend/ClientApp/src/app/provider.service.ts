@@ -7,6 +7,7 @@ import { ProviderCreateModel } from './provider-create.model';
 import { ProviderEditModel } from './provider-edit.model';
 import { BaseService } from './base.service';
 
+
 @Injectable()
 export class ProviderService extends BaseService {
 
@@ -43,5 +44,4 @@ export class ProviderService extends BaseService {
   public delete(id: string): Observable<ProviderCreateModel> {
     return this.http.delete<ProviderEditModel>(this.baseUrl + `providers/${id}`, { headers: this.getDefaultHeaders() });
   }
-
 }
