@@ -1,4 +1,4 @@
-export interface SellingProductListModel {
+export interface StoreListModel {
   id: string;
   name: string;
   price: number;

@@ -30,7 +30,7 @@ export class NavMenuComponent {
 
   public signOut(): void {
     this.authorizationService.removeAuthorization();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/store']);
   }
 
   public name(): string {
@@ -41,8 +41,8 @@ export class NavMenuComponent {
     return this.authorizationService.getPhoto();
   }
 
-  public showSellingProducts(): boolean {
-    return this.authorizationService.isAuthorized() && this.authorizationService.getUserType() !== 3;
+  public showStore(): boolean {
+    return !this.authorizationService.isAuthorized() || (this.authorizationService.isAuthorized() && this.authorizationService.getUserType() !== 3);
   }
 
   public showProviders(): boolean {

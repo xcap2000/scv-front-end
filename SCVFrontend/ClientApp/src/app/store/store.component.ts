@@ -1,28 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { BrandListModel } from '../brand-list.model';
 import { ActivatedRoute } from '@angular/router';
-import { SellingProductListModel } from '../selling-product-list.model';
-import { SellingProductService } from '../selling-product.service';
+import { StoreListModel } from '../store-list.model';
+import { StoreService } from '../store.service';
 import { BrandService } from '../brand.service';
 import { AuthorizationService } from '../authorization.service';
 import { CartService } from '../cart.service';
 
 
 @Component({
-  selector: 'app-selling-products',
-  templateUrl: './selling-products.component.html',
-  styleUrls: ['./selling-products.component.css']
+  selector: 'app-store',
+  templateUrl: './store.component.html',
+  styleUrls: ['./store.component.css']
 })
-export class SellingProductsComponent implements OnInit {
+export class StoreComponent implements OnInit {
 
   public brands: BrandListModel[] = [];
-  public sellingProducts: SellingProductListModel[] = [];
+  public storeListModels: StoreListModel[] = [];
   private brandId: string;
 
   public constructor(
     private route: ActivatedRoute,
     private cartService: CartService,
-    private sellingProductService: SellingProductService,
+    private storeService: StoreService,
     private authorizationService: AuthorizationService,
     private brandService: BrandService) { }
 
@@ -33,10 +33,10 @@ export class SellingProductsComponent implements OnInit {
         .subscribe(
           brands => {
             this.brands = brands;
-            this.sellingProductService.get(this.authorizationService.getUserId(), this.brandId)
+            this.storeService.get(this.authorizationService.getUserId(), this.brandId)
               .subscribe(
                 products => {
-                  this.sellingProducts = products;
+                  this.storeListModels = products;
                 },
                 error => console.log(error)
               )
@@ -46,11 +46,15 @@ export class SellingProductsComponent implements OnInit {
     });
   }
 
-  public buy(sellingProduct: SellingProductListModel): void {
-    this.cartService.post(this.authorizationService.getUserId(), sellingProduct.id)
+  public buy(storeListModel: StoreListModel): void {
+    this.cartService.post(this.authorizationService.getUserId(), storeListModel.id)
       .subscribe(
-        cartItemModel => sellingProduct.inCart = true,
+        cartItemModel => storeListModel.inCart = true,
         error => console.log(error)
       )
+  }
+
+  public canBuy(): boolean {
+    return this.authorizationService.isAuthorized();
   }
 }

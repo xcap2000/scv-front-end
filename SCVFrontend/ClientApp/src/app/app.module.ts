@@ -5,7 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
 import { ProvidersModule } from './providers/providers.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { SpinnerComponent } from './spinner/spinner.component';
@@ -17,35 +16,36 @@ import { SignInService } from './signin.service';
 import { HttpSpinnerInterceptor } from './http-spinner.interceptor';
 import { AuthorizedGuard } from './authorized.guard';
 import { ProductsComponent } from './products/products.component';
-import { SellingProductsComponent } from './selling-products/selling-products.component';
+import { StoreComponent } from './store/store.component';
 import { BrandService } from './brand.service';
-import { SellingProductService } from './selling-product.service';
+import { StoreService } from './store.service';
 import { CartComponent } from './cart/cart.component';
 import { CartService } from './cart.service';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
     SpinnerComponent,
     SignInComponent,
     ProductsComponent,
-    SellingProductsComponent,
-    CartComponent
+    StoreComponent,
+    CartComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: 'home', component: HomeComponent, pathMatch: 'full' },
-      { path: 'selling-products', component: SellingProductsComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
-      { path: 'selling-products/:brandId', component: SellingProductsComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
+      { path: 'store', component: StoreComponent, pathMatch: 'full' },
+      { path: 'store/:brandId', component: StoreComponent, pathMatch: 'full' },
       { path: 'cart', component: CartComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
+      { path: 'checkout/:cartId', component: CheckoutComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
       { path: 'signin', component: SignInComponent, pathMatch: 'full' },
       { path: 'products', component: ProductsComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
-      { path: '',    redirectTo: '/home', pathMatch: 'full'  }
+      { path: '',    redirectTo: '/store', pathMatch: 'full'  }
     ]),
     ProvidersModule,
     BsDropdownModule.forRoot()
@@ -55,7 +55,7 @@ import { CartService } from './cart.service';
     AuthorizationService,
     SignInService,
     BrandService,
-    SellingProductService,
+    StoreService,
     CartService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpSpinnerInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpJWTInterceptor, multi: true }
