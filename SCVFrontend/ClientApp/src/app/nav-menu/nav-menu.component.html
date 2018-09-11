@@ -8,19 +8,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" [routerLink]='["/home"]'>
+                <a class="navbar-brand" [routerLink]='["/store"]'>
                     <span class='glyphicon glyphicon-pencil'></span> Pen Store
                 </a>
             </div>
             <div id="navbar" class="navbar-collapse collapse" [ngClass]='{ "in": isExpanded }'>
                 <ul class="nav navbar-nav">
-                    <li [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-                        <a [routerLink]='["/home"]' (click)='collapse()'>
-                            <span class='glyphicon glyphicon-home'></span> Home
-                        </a>
-                    </li>
-                    <li [routerLinkActive]='["link-active"]' *ngIf="showSellingProducts()">
-                        <a [routerLink]='["/selling-products"]' (click)='collapse()'>Selling Products</a>
+                    <li [routerLinkActive]='["link-active"]' *ngIf="showStore()">
+                        <a [routerLink]='["/store"]' (click)='collapse()'>Store</a>
                     </li>
                     <li [routerLinkActive]='["link-active"]' *ngIf="showProviders()">
                         <a [routerLink]='["/providers"]' (click)='collapse()'>Providers</a>

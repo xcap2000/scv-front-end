@@ -13,7 +13,9 @@ export class HttpSpinnerInterceptor implements HttpInterceptor {
     @Inject(forwardRef(() => SpinnerService)) private spinnerService) { }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.spinnerService.show();
+    this.counter++;
+    if(this.counter > 0)
+      this.spinnerService.show();
     return next.handle(req).pipe(
       map(event => {
         return event;
@@ -22,7 +24,9 @@ export class HttpSpinnerInterceptor implements HttpInterceptor {
         return Observable.throw(error);
       }),
       finalize(() => {
-        this.spinnerService.hide();
+        this.counter--;
+        if(this.counter === 0)
+          this.spinnerService.hide();
       })
     )
   }

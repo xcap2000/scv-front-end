@@ -1,8 +1,8 @@
-.body-selling-products {
+.body-store {
     margin-top: 20px;
 }
 
-.selling-products {
+.store {
     padding-left: 0;
     padding-right: 0;
 }
@@ -16,7 +16,7 @@
     padding: 24px;
 }
 
-.selling-product-name {
+.store-name {
     height: 50px;
 }
 
@@ -25,7 +25,7 @@
         position: fixed;
     }
 
-    .selling-products {
+    .store {
         margin-left: 25%;
     }
 }

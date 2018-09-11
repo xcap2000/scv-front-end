@@ -1,5 +1,5 @@
 <div class="container-fluid body-cart">
-  <div class="well" *ngIf="showEmptyMessage()">No products were added to the cart.</div>
+  <div class="well" *ngIf="showEmptyMessage()">No products were added to the cart. <a [routerLink]='["/store"]'>click here</a> to start buying.</div>
   <table id="cart" class="table table-hover table-condensed" *ngIf="showCart()">
     <thead>
       <tr>
@@ -43,14 +43,14 @@
       </tr>
       <tr>
         <td>
-          <a href="#" class="btn btn-warning">
+          <a [routerLink]='["/store"]' class="btn btn-warning">
             <span class="glyphicon glyphicon-menu-left"></span>Continue Shopping
           </a>
         </td>
         <td colspan="2" class="hidden-xs"></td>
         <td class="hidden-xs text-center"><strong>Total {{cartModel.total | currency}}</strong></td>
         <td>
-          <a href="#" class="btn btn-success btn-block">
+          <a [routerLink]='["/checkout", cartModel.id]' class="btn btn-success btn-block">
             Checkout <span class="glyphicon glyphicon-menu-right"></span>
           </a>
         </td>

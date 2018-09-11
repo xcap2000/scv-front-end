@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { CartItemModel } from './cart-item.model';
 import { CartModel } from './cart.model';
+import { CheckoutModel } from './checkout.model';
 
 @Injectable()
 export class CartService extends BaseService {
@@ -28,5 +29,9 @@ export class CartService extends BaseService {
 
   public delete(cartItemId: string): Observable<boolean> {
     return this.http.delete<boolean>(this.baseUrl + `cart/${cartItemId}`, { headers: this.getDefaultHeaders() });
+  }
+
+  public checkout(checkoutModel: CheckoutModel): Observable<number> {
+    return this.http.post<number>(this.baseUrl + 'cart/checkout', checkoutModel, { headers: this.getDefaultHeaders() });
   }
 }

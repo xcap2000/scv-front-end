@@ -1,0 +1,46 @@
+<div class="container-fluid body-checkout">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <h1>Checkout</h1>
+      <form>
+        <div class="form-group">
+          <label for="street">Street</label>
+          <input type="text" class="form-control" id="street" name="street" [(ngModel)]="checkoutModel.street">
+        </div>
+
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" class="form-control" id="city" name="city" [(ngModel)]="checkoutModel.city">
+        </div>
+
+        <div class="form-group">
+          <label for="state">State</label>
+          <input type="text" class="form-control" id="state" name="state" [(ngModel)]="checkoutModel.state">
+        </div>
+
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input type="text" class="form-control" id="country" name="country" [(ngModel)]="checkoutModel.country">
+        </div>
+
+        <div class="form-group">
+          <label for="postalCode">Postal Code</label>
+          <input type="text" class="form-control" id="postalCode" name="postalCode" [(ngModel)]="checkoutModel.postalCode">
+        </div>
+
+        <div class="form-group">
+          <label for="creditCardNumber">Credit Card Number</label>
+          <input type="text" class="form-control" id="creditCardNumber" name="creditCardNumber" [(ngModel)]="checkoutModel.creditCardNumber">
+        </div>
+
+        <div class="form-group">
+          <label for="verificationCode">Verification Code</label>
+          <input type="text" class="form-control" id="verificationCode" name="verificationCode" [(ngModel)]="checkoutModel.verificationCode">
+        </div>
+
+        <button type="submit" class="btn btn-success" (click)="confirm()">Confirm</button>
+        <button type="button" class="btn" [routerLink]='["/cart"]'>Back to cart</button>
+      </form>
+    </div>
+  </div>
+</div>
