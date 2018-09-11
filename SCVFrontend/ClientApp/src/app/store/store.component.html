@@ -1,41 +1,45 @@
-<div class="container-fluid body-selling-products">
+<div class="container-fluid body-store">
     <div class="row">
         <div class="col-xs-12 col-sm-3 fixed-sidebar">
             <div class="list-group">
                 <a class="list-group-item all" [routerLinkActive]='["active"]' [routerLinkActiveOptions]='{ exact: true }'
-                    [routerLink]='["/selling-products"]'>
+                    [routerLink]='["/store"]'>
                     All
                 </a>
                 <a class="list-group-item" [routerLinkActive]='["active"]' [routerLinkActiveOptions]='{ exact: true }'
-                    [routerLink]='["/selling-products", brand.id]' *ngFor="let brand of brands">
+                    [routerLink]='["/store", brand.id]' *ngFor="let brand of brands">
                     <img class="img-circle brand-logo" [alt]="brand.name" src="data:image/jpg;base64,{{brand.logo}}" />
                     {{brand.name}}
                 </a>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-9 selling-products">
-            <div class="col-sm-6 col-md-4 col-xl-3" *ngFor="let sellingProduct of sellingProducts">
+        <div class="col-xs-12 col-sm-9 store">
+            <div class="col-sm-6 col-md-4 col-xl-3" *ngFor="let storeListModels1 of storeListModels">
                 <div class="thumbnail">
-                    <img src="data:image/jpg;base64,{{sellingProduct.photo}}" class="img-responsive">
+                    <img src="data:image/jpg;base64,{{storeListModels1.photo}}" class="img-responsive">
                     <div class="caption">
                         <div class="row">
                             <div class="col-xs-12">
-                                <h4 class="selling-product-name">{{sellingProduct.name}}</h4>
+                                <h4 class="store-name">{{storeListModels1.name}}</h4>
                             </div>
                             <div class="col-xs-12">
                                 <h3 class="pull-right">
-                                    <label>{{sellingProduct.price | currency}}</label>
+                                    <label>{{storeListModels1.price | currency}}</label>
                                 </h3>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-success btn-product pull-right" (click)='buy(sellingProduct)' [disabled]="sellingProduct.inCart" *ngIf="sellingProduct.canSell">
+                                <button class="btn btn-success btn-product pull-right" (click)='buy(storeListModels1)' [disabled]="storeListModels1.inCart" *ngIf="canBuy() && storeListModels1.canSell">
                                     <span class="glyphicon glyphicon-shopping-cart"></span>
-                                    <span *ngIf="!sellingProduct.inCart">Add to Cart</span>
-                                    <span *ngIf="sellingProduct.inCart">In Cart</span>
+                                    <span *ngIf="!storeListModels1.inCart">Add to Cart</span>
+                                    <span *ngIf="storeListModels1.inCart">In Cart</span>
                                 </button>
-                                <h3 *ngIf="!sellingProduct.canSell" class="text-danger">
+                                <button class="btn btn-success btn-product pull-right" [disabled]="!canBuy()" *ngIf="!canBuy()">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                                    <span>Sign In to buy</span>
+                                </button>
+                                <h3 *ngIf="!storeListModels1.canSell" class="text-danger">
                                     Out of stock
                                 </h3>
                             </div>
