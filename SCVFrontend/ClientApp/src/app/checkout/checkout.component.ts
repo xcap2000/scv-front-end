@@ -18,7 +18,7 @@ export class CheckoutComponent implements OnInit {
     country: null,
     postalCode: null,
     creditCardNumber: null,
-    verificationNumber: null
+    verificationCode: null
   };
 
   public constructor(
