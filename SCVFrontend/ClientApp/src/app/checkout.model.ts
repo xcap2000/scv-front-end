@@ -6,5 +6,5 @@ export interface CheckoutModel {
   country: string;
   postalCode: string;
   creditCardNumber: string;
-  verificationNumber: string;
+  verificationCode: string;
 }
