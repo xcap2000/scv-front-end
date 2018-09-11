@@ -22,6 +22,7 @@ import { StoreService } from './store.service';
 import { CartComponent } from './cart/cart.component';
 import { CartService } from './cart.service';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { PlacedOrderComponent } from './placed-order/placed-order.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     ProductsComponent,
     StoreComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    PlacedOrderComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -43,6 +45,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
       { path: 'store/:brandId', component: StoreComponent, pathMatch: 'full' },
       { path: 'cart', component: CartComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
       { path: 'checkout/:cartId', component: CheckoutComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
+      { path: 'placed-order/:orderId', component: PlacedOrderComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
       { path: 'signin', component: SignInComponent, pathMatch: 'full' },
       { path: 'products', component: ProductsComponent, pathMatch: 'full', canActivate: [AuthorizedGuard] },
       { path: '',    redirectTo: '/store', pathMatch: 'full'  }

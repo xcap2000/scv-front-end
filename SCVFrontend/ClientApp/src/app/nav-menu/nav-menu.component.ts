@@ -30,6 +30,7 @@ export class NavMenuComponent {
 
   public signOut(): void {
     this.authorizationService.removeAuthorization();
+    this.isExpanded = false;
     this.router.navigate(['/store']);
   }
 

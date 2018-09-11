@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckoutModel } from '../checkout.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../cart.service';
 
 @Component({
@@ -22,6 +22,7 @@ export class CheckoutComponent implements OnInit {
   };
 
   public constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private cartService: CartService) {
   }
@@ -36,7 +37,7 @@ export class CheckoutComponent implements OnInit {
     this.cartService.checkout(this.checkoutModel)
       .subscribe(
         orderNumber => {
-
+          this.router.navigate(['/placed-order', orderNumber.toString().padStart(10, '0')]);
         },
         error => console.log(error)
       )
