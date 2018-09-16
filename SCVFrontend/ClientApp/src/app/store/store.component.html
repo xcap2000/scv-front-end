@@ -8,7 +8,7 @@
                 </a>
                 <a class="list-group-item" [routerLinkActive]='["active"]' [routerLinkActiveOptions]='{ exact: true }'
                     [routerLink]='["/store", brand.id]' *ngFor="let brand of brands">
-                    <img class="img-circle brand-logo" [alt]="brand.name" src="data:image/jpg;base64,{{brand.logo}}" />
+                    <img class="brand-logo" [alt]="brand.name" src="data:image/gif;base64,{{brand.logo}}" />
                     {{brand.name}}
                 </a>
             </div>
@@ -16,7 +16,7 @@
         <div class="col-xs-12 col-sm-9 store">
             <div class="col-sm-6 col-md-4 col-xl-3" *ngFor="let storeListModels1 of storeListModels">
                 <div class="thumbnail">
-                    <img src="data:image/jpg;base64,{{storeListModels1.photo}}" class="img-responsive">
+                    <img src="data:image/gif;base64,{{storeListModels1.photo}}" class="img-responsive">
                     <div class="caption">
                         <div class="row">
                             <div class="col-xs-12">
@@ -39,9 +39,9 @@
                                     <span class="glyphicon glyphicon-shopping-cart"></span>
                                     <span>Sign In to buy</span>
                                 </button>
-                                <h3 *ngIf="!storeListModels1.canSell" class="text-danger">
+                                <h6 *ngIf="!storeListModels1.canSell" class="text-danger">
                                     Out of stock
-                                </h3>
+                                </h6>
                             </div>
                         </div>
                     </div>
