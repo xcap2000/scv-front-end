@@ -34,7 +34,7 @@
                     </li>
                     <li class="dropdown" dropdown  *ngIf="showLogin()">
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle>
-                            <img class="img-circle profile-image" [alt]="name()" src="data:image/gif;base64,{{photo()}}" /> {{name()}} <span class="caret"></span>
+                            <img class="img-circle profile-image" [alt]="name()" src="data:image/gif;base64,{{photo()}}" /> {{name()}} ({{type()}})<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" *dropdownMenu>
                             <li>

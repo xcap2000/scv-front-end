@@ -38,6 +38,17 @@ export class NavMenuComponent {
     return this.authorizationService.getUserName();
   }
 
+  public type(): string {
+    switch (this.authorizationService.getUserType()) {
+      case 1:
+        return "Cliente";
+      case 2:
+        return "Vendedor";
+      case 3:
+        return "Administrador";
+    }
+  }
+
   public photo(): string {
     return this.authorizationService.getPhoto();
   }
