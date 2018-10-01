@@ -11,7 +11,7 @@ import { ProviderEditModel } from '../provider-edit.model';
 })
 export class CreateProviderComponent implements OnInit {
 
-  public provider: ProviderEditModel = { name: '', baseApiUrl: '' };
+  public provider: ProviderEditModel = { id: '', name: '', baseApiUrl: '' };
 
   public constructor(
     private router: Router,
