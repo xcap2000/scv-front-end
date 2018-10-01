@@ -1,5 +1,5 @@
 export interface ProviderEditModel {
-  id?: string;
+  id: string;
   name: string;
   baseApiUrl: string;
 }
