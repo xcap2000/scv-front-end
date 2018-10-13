@@ -43,10 +43,10 @@ namespace SCVFrontend
             else
             {
                 app.UseExceptionHandler("/Error");
-                app.UseHsts();
+                //app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseResponseCompression();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
