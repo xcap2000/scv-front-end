@@ -5,10 +5,10 @@ namespace SCVFrontend.Controllers
 {
     public class WellKnownController : Controller
     {
-        [Route("/.well-known/acme-challenge/YSd9yjchIP5ou3ZaTaTQM4ElshK6TMVsScZ_GDxcUnU")]
+        [Route("/.well-known/acme-challenge/5SctvNVn-S3e-AzWmsr9elV4joyUBrk6Jwd_p2Ls6A8")]
         public IActionResult Index()
         {
-            return File(Encoding.UTF8.GetBytes("YSd9yjchIP5ou3ZaTaTQM4ElshK6TMVsScZ_GDxcUnU.fCta6qCK-oFf6d_ExTBGy0868GJ2a_r_H8IzWF4UNWk"), "text/plain");
+            return File(Encoding.UTF8.GetBytes("5SctvNVn-S3e-AzWmsr9elV4joyUBrk6Jwd_p2Ls6A8.fCta6qCK-oFf6d_ExTBGy0868GJ2a_r_H8IzWF4UNWk"), "text/plain");
         }
     }
 }
